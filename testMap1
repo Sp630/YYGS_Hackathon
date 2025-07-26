@@ -31,7 +31,7 @@
     </div>
 
     <script>
-        mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic3A2MzAiLCJhIjoiY21ka285MXlwMHpoNDJucTNwdmxibDNieSJ9.MFgODrs5guH5Vk12nDseJQ';
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
