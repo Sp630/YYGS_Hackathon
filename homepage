@@ -20,59 +20,27 @@
 
     
   <center><h1 class="logo">
-   <span>Univers A&A</span>
+   <span>YYGO!</span>
       </h1></center>
   
 
-    <h3> A PROPOS DE NOUS - </h3>
-    <h4 style="text-decoration: underline"> NOTRE OBJECTIF -</h4>
-    <p>Bienvenue sur <strong>L'UNIVERS A&A</strong>! </p>
-     <p>Notre objectif premier est de vous offrir la meilleure sélection d’options de divertissement ; vous pouvez tout découvrir, des livres et de la musique aux films et émissions de télévision, ici. <br> <br>
-      Notre site web garantit que vous obtenez le plus d'informations possible sur nos différentes recommandations en fournissant des hyperliens vers <strong>
-      <a href="https://help.imdb.com/article/imdb/general-information/what-is-imdb/G836CY29Z4SGNMK5?ref_=helpart_nav_1#" style="color: red" target="_blank">IMDB</a>,
-      <a href="https://www.goodreads.com/about/us" style="color:#faf1be" target="_blank">Goodreads</a> et
-      <a href="https://www.spotify.com/us/about-us/contact/" style="color:gray" target="_blank">Spotify</a>. </strong><br></p>
-    
-
-    <h4 style="text-decoration: underline"> À PROPOS DES CRÉATRICES - </h4>
-    <h4 style="color: #bee6c8"><strong>ANA BIZOT SACKO</strong>  ET <strong>ANYEN ATAM</strong></h4>
-    <p class="text">Anyen Atam, camerounienne-sud-africaine, née et élevée à Johannesburg, a fréquenté une école internationale française en grandissant, où elle a appris le codage.  Après avoir obtenu son diplôme d'études secondaires, elle a obtenu une bourse pour l'UCLA, où elle s'est spécialisée en informatique et en anglais. Après avoir obtenu un diplôme en informatique, Anyen et son amie de lycée sud-africaine, Ana Bizot-Sacko, qui avait fréquenté le MIT, ont décidé de créer un site Web ensemble, considérant qu'elles étaient toutes deux expertes en informatique. Ana Bizot Sacko, quant à elle, est franco-malienne. Elle a aussi grandit en Afrique du Sud, ainsi qu'en France. Elles ont décidé de se retrouver à Los Angeles, où résidait Anyen, et ont commencé leur voyage pour construire ce qui est aujourd’hui connu sous le nom de L’Univers A&A.
+    <h3> THE BEST MAP FOR ANY YYGS STUDENT! </h3>
+    <h4 style="text-decoration: underline"> OUR OBJECTIVE</h4>
+    <p>Welcome to <strong>YYGO!</strong> </p>
+     <p>We created this website because, as YYGS students, we found it extremely annoying to have to navigate between google maps and the boundary map constantly. <br> <br>
+      Knowing that you can risk exclusion from the program if you go beyond the boundaries, being able to avoid them seemed important to us.
       
-      <img src="../Images/aeta.jpg"  alt="Image des deux créatrices, Anyen et Ana" width="300"></p>
-      <br><br>
+    
+
+
 
     
-      <p>Voici un résumé des pages disponibles, du nombre de catégories dans chacune d'entre elles, et du nombre total d'oeuvres et d'artistes.</p>
-    <table>
-
-      <tr>
-        <th></th>
-        <th>Catégories</th>
-        <th>Oeuvres</th>
-      </tr>
-      <tr>
-        <td><strong>Films</strong></td>
-        <td>23</td>
-        <td>47</td>
-      </tr>
-      <tr>
-        <td><strong>Musique</strong></td>
-        <td>17</td>
-        <td>39</td>
-      </tr>
-      <tr>
-        <td><strong>Livres</strong></td>
-        <td>8</td>
-        <td>25</td>
-      
-      </tr>
-    </table>
+      <p>In the map page, you'll be able to access a map with your position within the boundaries.</p>
     
-    <div class="card">
   
       <br >
       <h3 >
-        Notez cette page
+        Note this page
       </h3>
       <span onclick=" srs(1)"
             class="star">★
@@ -95,13 +63,8 @@
   </div>
  
 
-<p> HTML approuvé par W3<br>
-<a href="http://jigsaw.w3.org/css-validator/check/referer">
-    <img style="border:0;width:88px;height:31px"
-        src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
-        alt="Valid CSS!" />
-    </a>
-</p>
+
+
         
   </body>
 </html>
