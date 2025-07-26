@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Displaying a map on a Webpage</title>
-        <meta name="viewport" content="intial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
         <script src='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js'></script>
         <style>
@@ -15,19 +15,44 @@
         <div id="map"></div>
         <script>
             mapboxgl.accessToken = 'pk.eyJ1Ijoic3A2MzAiLCJhIjoiY21ka285MXlwMHpoNDJucTNwdmxibDNieSJ9.MFgODrs5guH5Vk12nDseJQ';
+            
+            // Initialize the map with a default center and zoom
             const map = new mapboxgl.Map({
                 container: 'map',
                 style: 'mapbox://styles/mapbox/streets-v12',
-                center: [-111, 32],
+                center: [-111, 32], // Default position
                 zoom: 1
-            }); 
+            });
 
+            // Use the geolocation API to get the user's location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const userLatitude = position.coords.latitude;
+                    const userLongitude = position.coords.longitude;
+
+                    // Set the map center to the user's location and zoom in
+                    map.setCenter([userLongitude, userLatitude]);
+                    map.setZoom(15); // Adjust zoom level (15 is close-up)
+                    
+                    // Optionally, add a marker to indicate the user's location
+                    new mapboxgl.Marker()
+                        .setLngLat([userLongitude, userLatitude])
+                        .addTo(map);
+                }, function(error) {
+                    alert('Error getting your location: ' + error.message);
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+
+            // Add the Mapbox Directions control
             map.addControl(
                 new MapboxDirections({
                     accessToken: mapboxgl.accessToken
                 }), 'top-left'
             );
 
+            // Add other map controls
             map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
             map.addControl(new mapboxgl.NavigationControl(), 'top-right');
         </script>
