@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Mapbox Intersection</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+    <style>
+        /* Make the map container big but not full-screen */
+        #map {
+            width: 80%;          /* 80% of the page width */
+            height: 600px;       /* Set a custom height */
+            margin: 20px auto;   /* Center the map horizontally with some margin */
+            border: 2px solid #ccc; /* Optional border around the map */
+        }
+
+        /* Optional: Style for the page content */
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>3D Map of the Intersection</h1>
+        <p>This map shows a 3D view of the intersection area.</p>
+        <div id="map"></div>
+    </div>
+
+    <script>
+        mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [longitude, latitude], // Set to intersection's central point
+            zoom: 16
+        });
+
+        const intersectionGeoJSON = {
+            "type": "FeatureCollection",
+            "features": [{
+                "type": "Feature",
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [longitude1, latitude1],
+                            [longitude2, latitude2],
+                            [longitude3, latitude3],
+                            [longitude4, latitude4],
+                            [longitude1, latitude1]
+                        ]
+                    ]
+                },
+                "properties": {
+                    "description": "Intersection Boundary"
+                }
+            }]
+        };
+
+        map.on('load', function () {
+            // Enable 3D terrain
+            map.addSource('mapbox-dem', {
+                type: 'raster-dem',
+                url: 'mapbox://mapbox.terrain-rgb',
+                tileSize: 512,
+                maxzoom: 14
+            });
+            map.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
+            map.setPitch(60);  // Tilt the map
+
+            // Add 3D buildings layer
+            map.addLayer({
+                'id': '3d-buildings',
+                'type': 'fill-extrusion',
+                'source': 'composite',
+                'source-layer': 'building',
+                'minzoom': 15,
+                'paint': {
+                    'fill-extrusion-color': '#aaa',
+                    'fill-extrusion-height': ['get', 'height'],
+                    'fill-extrusion-base': ['get', 'min_height'],
+                    'fill-extrusion-opacity': 0.6
+                }
+            });
+
+            // Add intersection boundary and fill as before
+            map.addSource('intersection', {
+                type: 'geojson',
+                data: intersectionGeoJSON
+            });
+
+            map.addLayer({
+                id: 'intersection-boundary',
+                type: 'line',
+                source: 'intersection',
+                layout: {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                paint: {
+                    'line-color': '#FF0000',
+                    'line-width': 4
+                }
+            });
+
+            map.addLayer({
+                id: 'intersection-fill',
+                type: 'fill',
+                source: 'intersection',
+                paint: {
+                    'fill-color': '#FF0000',
+                    'fill-opacity': 0.3
+                }
+            });
+        });
+    </script>
+</body>
+</html>
