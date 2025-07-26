@@ -73,7 +73,7 @@
 map.on('load', function() {
     // Define your boundary coordinates (example: Tucson area)
     const boundaryCoordinates = [
-    [-72.9300, 41.3100], // Southwest corner (College & Grove)
+        [-72.9300, 41.3100], // Southwest corner (College & Grove)
     [-72.9250, 41.3100], // Southeast corner (College & Temple)
     [-72.9250, 41.3165], // Northeast corner (High & Sachem)
     [-72.9300, 41.3165], // Northwest corner (Prospect & Sachem)
@@ -123,11 +123,10 @@ map.on('load', function() {
     });
 });
 
-// The rest of your existing code (geolocation, controls, etc.) goes below...
 
         // Use the geolocation API to get the user's location
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
+            navigator.geolocation.watchPosition(function(position) {
                 const userLatitude = position.coords.latitude;
                 const userLongitude = position.coords.longitude;
 
@@ -135,12 +134,22 @@ map.on('load', function() {
                 map.setCenter([userLongitude, userLatitude]);
                 map.setZoom(15); // Adjust zoom level (15 is close-up)
                 
+                //Remove old marker
+                if(window.userMarker) window.userMarker.remove();
+                
                 // Optionally, add a marker to indicate the user's location
-                new mapboxgl.Marker()
+                window.userMarker = new mapboxgl.Marker()
                     .setLngLat([userLongitude, userLatitude])
                     .addTo(map);
             }, function(error) {
                 alert('Error getting your location: ' + error.message);
+            },
+            {
+                
+            enableHighAccuracy: true,  // Uses GPS if available
+            maximumAge: 0,            // No cached positions
+            timeout: 5000             // Timeout after 5 seconds
+    
             });
         } else {
             alert("Geolocation is not supported by this browser.");
