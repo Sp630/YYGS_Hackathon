@@ -69,6 +69,62 @@
             zoom: 1
         });
 
+// Add this section - RIGHT AFTER map initialization but BEFORE geolocation code
+map.on('load', function() {
+    // Define your boundary coordinates (example: Tucson area)
+    const boundaryCoordinates = [
+    [-72.9300, 41.3100], // Southwest corner (College & Grove)
+    [-72.9250, 41.3100], // Southeast corner (College & Temple)
+    [-72.9250, 41.3165], // Northeast corner (High & Sachem)
+    [-72.9300, 41.3165], // Northwest corner (Prospect & Sachem)
+    [-72.9300, 41.3100]
+    ];
+
+    // Add the boundary as a filled polygon
+    map.addLayer({
+        id: 'boundary-fill',
+        type: 'fill',
+        source: {
+            type: 'geojson',
+            data: {
+                type: 'Feature',
+                geometry: {
+                    type: 'Polygon',
+                    coordinates: [boundaryCoordinates]
+                }
+            }
+        },
+        paint: {
+            'fill-color': '#4E3FC8', // Purple color
+            'fill-opacity': 0.2,     // 20% opacity
+            'fill-outline-color': '#4E3FC8'
+        }
+    });
+
+    // Add a more visible outline
+    map.addLayer({
+        id: 'boundary-line',
+        type: 'line',
+        source: {
+            type: 'geojson',
+            data: {
+                type: 'Feature',
+                geometry: {
+                    type: 'LineString',
+                    coordinates: boundaryCoordinates
+                }
+            }
+        },
+        paint: {
+            'line-color': '#4E3FC8',
+            'line-width': 3,
+            'line-dasharray': [2, 2] // Dashed line
+        }
+    });
+});
+
+// The rest of your existing code (geolocation, controls, etc.) goes below...
+
         // Use the geolocation API to get the user's location
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
