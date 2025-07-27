@@ -1,32 +1,72 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Page d'accueil</title>
-    <link href="../style/main.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-    <meta charset="utf-8">
-    <script src="../Scripts/script.js" defer></script>
-  </head>
-  <body style="font-family: 'Verdana', sans-serif;">
-    <nav>
-      <ul>
-        <li>     <img src="../logo.jpg"  alt="Image des deux créatrices, Anyen et Ana" width="40" >
-</li>
-        <li><a href="main.html">Homepage</a></li>
-        <li><a href="map.html">Map</a></li>
-        <li><a href="places.html">Places</a></li>
-        <li><a href="class.html">Class</a></li>
-      
-      </ul>
-    </nav>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page d'accueil</title>
+  <link href="../style/main.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+  <script src="../Scripts/script.js" defer></script>
+
+  <!-- Mapbox CSS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">
+
+  <!-- Mapbox JS -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+
+  <style>
+    body {
+      font-family: 'Verdana', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      background-color: #f0f0f0;
+    }
+
+    nav ul li {
+      margin-right: 15px;
+    }
+
+    .dashboard {
+      padding: 20px;
+    }
+
+    #map {
+      width: 100%;
+      height: 400px;
+      margin: 20px 0;
+    }
+
+    .search-section {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
 <body>
+  <nav>
+    <ul>
+      <li><img src="../logo.jpg" alt="Image des deux créatrices, Anyen et Ana" width="40"></li>
+      <li><a href="main.html">Homepage</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li><a href="places.html">Places</a></li>
+      <li><a href="class.html">Class</a></li>
+    </ul>
+  </nav>
+
   <div class="dashboard">
     <h2>Welcome, Admin</h2>
 
-    <div class="map-placeholder">
-      <p>[Map will be displayed here]</p>
-    </div>
+    <!-- Map container -->
+    <div id="map"></div>
 
     <div class="search-section">
       <label for="studentId">Search Student UniqueID:</label>
@@ -34,5 +74,118 @@
       <button id="searchBtn">Search</button>
     </div>
   </div>
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic3A2MzAiLCJhIjoiY21ka285MXlwMHpoNDJucTNwdmxibDNieSJ9.MFgODrs5guH5Vk12nDseJQ';
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [-111, 32],
+      zoom: 1
+    });
+
+    map.on('load', function () {
+      const boundaryCoordinates = [
+        [-72.93354909959801, 41.30890680317543],
+        [-72.93180105186438, 41.311322527359295],
+        [-72.9319304047896, 41.31192834659609],
+        [-72.93136998807053, 41.31219001394311],
+        [-72.9320970151655, 41.31295225631473],
+        [-72.93112764570523, 41.313987526456685],
+        [-72.93070354656656, 41.31365760698796],
+        [-72.93088530333996, 41.31214450665411],
+        [-72.92955242033202, 41.31181457785709],
+        [-72.92858305087175, 41.31262233160646],
+        [-72.92559921050163, 41.31178044719658],
+        [-72.92503879378256, 41.31379412559153],
+        [-72.92363017878519, 41.3135210880985],
+        [-72.92246390615314, 41.312872619469175],
+        [-72.92302432287268, 41.312098999332704],
+        [-72.92391796034396, 41.3127474756576],
+        [-72.92456925544997, 41.311325370016164],
+        [-72.923887667548, 41.31098406004594],
+        [-72.9246449874389, 41.310290057596234],
+        [-72.92319093324855, 41.30950502952686],
+        [-72.92456925544997, 41.30997149662102],
+        [-72.92705326469266, 41.30947089765638],
+        [-72.92875565563817, 41.30728631355336],
+        [-72.93354909959801, 41.30890680317543]
+      ];
+
+      map.addLayer({
+        id: 'boundary-fill',
+        type: 'fill',
+        source: {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            geometry: {
+              type: 'Polygon',
+              coordinates: [boundaryCoordinates]
+            }
+          }
+        },
+        paint: {
+          'fill-color': '#4E3FC8',
+          'fill-opacity': 0.2,
+          'fill-outline-color': '#4E3FC8'
+        }
+      });
+
+      map.addLayer({
+        id: 'boundary-line',
+        type: 'line',
+        source: {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            geometry: {
+              type: 'LineString',
+              coordinates: boundaryCoordinates
+            }
+          }
+        },
+        paint: {
+          'line-color': '#4E3FC8',
+          'line-width': 3,
+          'line-dasharray': [2, 2]
+        }
+      });
+    });
+
+    // Geolocation
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(function (position) {
+        const userLatitude = position.coords.latitude;
+        const userLongitude = position.coords.longitude;
+
+        map.setCenter([userLongitude, userLatitude]);
+        map.setZoom(15);
+
+        if (window.userMarker) window.userMarker.remove();
+
+        window.userMarker = new mapboxgl.Marker()
+          .setLngLat([userLongitude, userLatitude])
+          .addTo(map);
+      }, function (error) {
+        alert('Error getting your location: ' + error.message);
+      }, {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+        timeout: 5000
+      });
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+
+    // Mapbox controls
+    map.addControl(new MapboxDirections({
+      accessToken: mapboxgl.accessToken
+    }), 'top-left');
+
+    map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
+    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+  </script>
 </body>
 </html>
