@@ -9,8 +9,6 @@ body {
 h2 {
   font-size: 30px;
   margin: 0.5em 0;
-  
-  
 
 
 }
@@ -33,6 +31,19 @@ h5 {
 
 p {
   font-size: 15px; 
+}
+a {
+  color: black;            /* Text color */
+  text-decoration: none;   /* Removes underline */
+  font-size: 16px;         /* Optional: change text size */
+  /* Optional: add a border */
+  padding: 4px 8px;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: purple;           /* Change color when hovering */
+  border-color: purple;    /* Optional: change border on hover */
 }
 
 
