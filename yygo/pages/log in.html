@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page d'accueil</title>
+    <link href="../style/main.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <meta charset="utf-8">
+    <script src="../Scripts/script.js" defer></script>
+  </head>
+  <body style="font-family: 'Verdana', sans-serif;">
+    <nav>
+      <ul>
+        <li>     <img src="../logo.jpg"  alt="Image des deux créatrices, Anyen et Ana" width="40" >
+</li>
+        <li><a href="main.html">Homepage</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="places.html">Places</a></li>
+        <li><a href="class.html">Class</a></li>
+      
+      </ul>
+    </nav>
+<body>
+  <div class="login-container">
+    <h2>Admin Login</h2>
+    <form id="loginForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" required>
+
+      <button type="submit">Login</button>
+      <p id="error-msg" class="error"></p>
+    </form>
+  </div>
+
+  <script src="Scripts/admin.js"></script>
+</body>
+</html>

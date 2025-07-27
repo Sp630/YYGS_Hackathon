@@ -1,0 +1,146 @@
+/* Set the background color of the page and the default text color */
+body { 
+  background-color: #f4f2f2; 
+  color: #0f4d92;
+  padding: 1em;
+}
+
+/* Style for headings and text */
+h2 {
+  font-size: 30px;
+  margin: 0.5em 0;
+  
+  
+
+
+}
+
+
+h1{
+  text-align: center;
+}
+h3 {
+  font-size: 15px;
+  text-align: center;
+}
+
+
+h5 {
+  text-decoration: underline; 
+  font-size: 16px;
+}
+
+
+p {
+  font-size: 15px; 
+}
+
+
+h4 {
+  font-size: 20px;
+}
+
+/* coding links (so that they don't change color when clicked) */
+a:link, a:visited {
+
+  text-decoration: none; 
+}
+
+/* Add a hover effect to links */
+a:hover {
+  text-decoration: underline; 
+  
+}
+
+/* for the text, so that it aligns with the picture */
+.text {
+  display: flex; 
+  align-items: center; 
+  justify-content: flex-start;
+}
+
+
+/* NAVIGATION BAR  */
+
+nav {
+  padding: 10px; 
+  text-align: center; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+/* Style for the list of links inside the nav bar */
+ul {
+  list-style-type: none; 
+  background-color: #0f4d92; 
+  margin: 0; 
+  padding: 0; 
+  font-family: 'Oswald', sans-serif; 
+  display: flex; 
+  width: 100%; 
+  justify-content: space-evenly; 
+}
+
+/* Style for images */
+img {
+  border-radius: 10%; 
+  margin: 10px; 
+  text-align: left;
+}
+
+li a {
+  color: white; 
+  text-decoration: none; 
+  padding: 1em; 
+  display: block; 
+}
+
+
+li a:hover {
+  background-color: #ffffff; 
+}
+
+/* LOGO */
+
+span {
+  font-size: 8em; 
+  font-family: 'Impact', sans-serif; 
+  display: inline-block; 
+  color: #0f4d92; 
+}
+
+/* Add 3D styling to the logo */
+.logo {
+  perspective: 1000px; /
+  perspective-origin: 50% 50%; 
+  font-size: 1em; 
+}
+
+/* Add transformation effects to the logo's text */
+.logo span {
+  display: inline-block; 
+  transform-origin: 50% 50%; 
+  transform: scaleX(1.2) rotateY(15deg); /* Give the text a slight 3D tilt */
+  transition: transform 0.5s ease; /* Smoothly animate the effect */
+}
+
+.logo:hover span {
+  transform: scaleX(1.3) rotateY(360deg); 
+}
+
+a.signin {
+  text-decoration: none;         /* removes underline */
+  font-size: 1.1em;              /* slightly larger than normal text */
+  border: 2px solid navy;        /* navy border around the link */
+  padding: 4px 8px;              /* optional: adds spacing inside the border */
+     
+  display: inline-block;         /* allows border and padding to behave well */
+  border-radius: 4px;            /* optional: slightly rounded corners */
+}
+
+a.signin:hover{
+  background-color: navy;
+  color: white;
+
+}
