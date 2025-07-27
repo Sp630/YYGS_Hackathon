@@ -5,12 +5,12 @@
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <title>Your Website</title>
 
-    <!-- Mapbox CSS and JavaScript -->
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
     <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">
     <link rel="stylesheet" href="../style/main.css">
+<script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
     
     <style>
         
@@ -139,13 +139,28 @@ map.on('load', function() {
     });
 });
 
-
+        //let wasInside = true;
         // Use the geolocation API to get the user's location
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(function(position) {
                 const userLatitude = position.coords.latitude;
                 const userLongitude = position.coords.longitude;
 
+                //Use turf
+                const userPoint = turf.point([userLongitude, userLatitude]);
+
+                const isInside = turf.booleanPointInPolygon(userPoint, boundaryCoordinates);
+
+                if (wasInside !== null && wasInside !== isInside) {
+                if (!isInside) {
+                    alert("You've left Yale campus boundaries!");
+                    map.setPaintProperty('yale-boundary', 'fill-color', '#ff0000');
+                    
+                } else {
+                    alert("Welcome back to Yale campus!");
+                }
+            }
+            wasInside = isInside;
                 // Set the map center to the user's location and zoom in
                 map.setCenter([userLongitude, userLatitude]);
                 map.setZoom(15); // Adjust zoom level (15 is close-up)
